@@ -37,6 +37,17 @@ defmodule MermexTest do
     assert String.contains?(svg, "<svg")
   end
 
+  test "render with options" do
+    {:ok, svg} = Mermex.render("flowchart LR; A-->B-->C", font_family: "sans-serif", node_spacing: 80)
+    assert String.contains?(svg, "<svg")
+    assert String.contains?(svg, "sans-serif")
+  end
+
+  test "render with integer option values" do
+    {:ok, svg} = Mermex.render("flowchart LR; A-->B-->C", node_spacing: 100, rank_spacing: 100)
+    assert String.contains?(svg, "<svg")
+  end
+
   test "renders a pie chart" do
     diagram = """
     pie title Pets
